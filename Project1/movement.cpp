@@ -70,21 +70,9 @@ bool Movement::frame(float fill, Bone* root) {
 
   for (std::map<unsigned long long,glm::vec3>::iterator kv = sequence[position].begin(); kv != sequence[position].end(); ++kv) {
     glm::vec3 dv = glm::abs(sequence[position-1][kv->first] - kv->second);
-/*
-    if (dv.x > 180)
-      dv.x = 360 - dv.x;
 
-    if (dv.y > 180)
-      dv.y = 360 - dv.y;
-
-    if (dv.z > 180)
-      dv.z = 360 - dv.z;
-*/
     glm::vec3 s = sgn(sequence[position-1][kv->first], kv->second);
 
-    //d += fabs(dv.x) < 0.01f;
-    //d += fabs(dv.y) < 0.01f;
-    //d += fabs(dv.z) < 0.01f;
 
     dv.x *= s.x * fill;
     dv.y *= s.y * fill;

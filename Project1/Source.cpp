@@ -30,7 +30,7 @@ GLfloat mat_podstawa[] = { 0.0, 1.0, 0.0, 1.0 };
 GLfloat mat_ramie[] = { 0.0, 0.0, 1.0, 1.0 };
 GLfloat mat_staw[] = {1.0, 0.0, 0.0, 1.0 };
 GLfloat mat_dlon[] = { 1.0,1.0,0.0, 1.0 };
-GLfloat mat_cel[] = { 106.0 / 255.0,169.0 / 255.0,159.0 / 255.0, 1.0 };
+GLfloat mat_cel[] = { 1.0,1.0,1.0, 1.0 };
 
 Bone* root;
 float r_up = 60.0f;

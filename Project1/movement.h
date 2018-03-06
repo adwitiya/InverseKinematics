@@ -7,13 +7,6 @@
 
 #include "bone.h"
 
-/**
- * Class defining animation sequence of the skeleton.
- *
- * Any number of movements (relative or absolute) may be
- * defined, after defining keyframe() must be called to mark
- * end movement.
- */
 class Movement {
   private:
     /**
