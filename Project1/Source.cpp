@@ -150,7 +150,7 @@ void displayFrame(void) {
 	glMaterialfv(GL_FRONT, GL_EMISSION, mat_cel);
 	mat_cel[3] = 1.0;
 	glLoadMatrixf(glm::value_ptr(glm::translate(M*V, target)));
-	glutSolidSphere(0.3f, 32, 32);
+	glutSolidSphere(0.5f, 32, 32);
 	glPopMatrix();
 
 	GLfloat t[] = { 0.0,0.0, 0.0,1.0 };
@@ -393,7 +393,7 @@ int main(int argc, char* argv[]) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(1024, 768);
 	glutInitWindowPosition(0, 0);
-	glutCreateWindow("Inverse Kinematics - Adwitiya Chakraborty");
+	glutCreateWindow("Inverse Kinematics - Adwitiya Chakraborty - 17320705");
 	glutDisplayFunc(displayFrame);
 	glutIdleFunc(nextFrame);
 
