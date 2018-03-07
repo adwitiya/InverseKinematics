@@ -19,6 +19,7 @@ float angle_y = 0;
 float zoom = 15.0f;
 float cdx, cdy;
 
+
 glm::vec3 target;
 Movement* animation = new Movement();
 bool animation_running = false;
@@ -31,6 +32,8 @@ GLfloat bone_color[] = { 0.0, 0.0, 1.0, 1.0 };
 GLfloat joint_color[] = {1.0, 0.0, 0.0, 1.0 };
 GLfloat tip_color[] = { 1.0,1.0,0.0, 1.0 };
 GLfloat ball_color[] = {255.0,140.5,25.0, 1.0 };
+
+
 
 Bone* root;
 float r_up = 60.0f;
@@ -388,6 +391,9 @@ void keyUp(unsigned char c, int x, int y) {
 
 
 int main(int argc, char* argv[]) {
+
+
+
 	srand(time(0));
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
