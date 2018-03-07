@@ -1,3 +1,15 @@
+#/*********************************************************************/
+//   source.cpp -- Implementation of Inverse Kinematics using CCD	   *
+//		 Author:  Adwitiya Chakraborty                                 *
+//                                                                     *
+//      Purpose: CS7GV5 Real Time Animation - Assignment 3 	           *
+//                                                                     *
+// GitHub Repo : https://github.com/adwitiya/InverseKinematics		   *
+//		 Email : chakraad@tcd.ie									   *
+//  Build Date : 06.03.2018											   *
+#/*********************************************************************/
+
+
 #include <stdio.h> 
 #include <GL/glew.h>
 #include <GL/freeglut.h>
