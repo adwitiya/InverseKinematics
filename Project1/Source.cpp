@@ -26,11 +26,11 @@ float animation_fill = 0.0f;
 bool root_set = false;
 unsigned long long effector = 0;
 
-GLfloat mat_podstawa[] = { 0.0, 1.0, 0.0, 1.0 };
-GLfloat mat_ramie[] = { 0.0, 0.0, 1.0, 1.0 };
-GLfloat mat_staw[] = {1.0, 0.0, 0.0, 1.0 };
-GLfloat mat_dlon[] = { 1.0,1.0,0.0, 1.0 };
-GLfloat mat_cel[] = { 1.0,1.0,1.0, 1.0 };
+GLfloat pod_color[] = { 0.0, 1.0, 0.0, 1.0 };
+GLfloat bone_color[] = { 0.0, 0.0, 1.0, 1.0 };
+GLfloat joint_color[] = {1.0, 0.0, 0.0, 1.0 };
+GLfloat tip_color[] = { 1.0,1.0,0.0, 1.0 };
+GLfloat ball_color[] = {255.0,140.5,25.0, 1.0 };
 
 Bone* root;
 float r_up = 60.0f;
@@ -44,9 +44,9 @@ void randomizeTarget() {
 
 
 	glLightfv(GL_LIGHT1, GL_POSITION, light_position);
-	mat_cel[3] = 0.5;
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, mat_cel);
-	mat_cel[3] = 1.0;
+	ball_color[3] = 0.5;
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, ball_color);
+	ball_color[3] = 1.0;
 
 	delete animation;
 	animation = new Movement();
@@ -78,14 +78,14 @@ void drawBones(Bone* b) {
 
 	if (b->parent != NULL) {
 		s[0] = 250;
-		glMaterialfv(GL_FRONT, GL_SPECULAR, mat_staw);
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_staw);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, joint_color);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, joint_color);
 		glMaterialfv(GL_FRONT, GL_SHININESS, s);
 		glutSolidSphere(0.2f, 32, 32);
 	}
 
-	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_ramie);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_ramie);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, bone_color);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, bone_color);
 	s[0] = 11;
 	glMaterialfv(GL_FRONT, GL_SHININESS, s);
 
@@ -103,8 +103,8 @@ void drawBones(Bone* b) {
 		glPushMatrix();
 
 		glLoadMatrixf(glm::value_ptr(glm::translate(b->M, glm::vec3(0.0f, 0.0f, b->length - 0.5f))));
-		glMaterialfv(GL_FRONT, GL_SPECULAR, mat_dlon);
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_dlon);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, tip_color);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, tip_color);
 		s[0] = 250;
 		glMaterialfv(GL_FRONT, GL_SHININESS, s);
 
@@ -143,24 +143,24 @@ void displayFrame(void) {
 
 	GLfloat s[] = { 128 };
 	glPushMatrix();
-	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_cel);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_cel);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, ball_color);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, ball_color);
 	glMaterialfv(GL_FRONT, GL_SHININESS, s);
-	mat_cel[3] = 0.5;
-	glMaterialfv(GL_FRONT, GL_EMISSION, mat_cel);
-	mat_cel[3] = 1.0;
+	ball_color[3] = 0.5;
+	glMaterialfv(GL_FRONT, GL_EMISSION, ball_color);
+	ball_color[3] = 1.0;
 	glLoadMatrixf(glm::value_ptr(glm::translate(M*V, target)));
-	glutSolidSphere(0.5f, 32, 32);
+	glutSolidSphere(0.3f, 32, 32);
 	glPopMatrix();
 
 	GLfloat t[] = { 0.0,0.0, 0.0,1.0 };
 	glPushMatrix();
-	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_podstawa);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_podstawa);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, pod_color);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, pod_color);
 	s[0] = 0;
 	glMaterialfv(GL_FRONT, GL_SHININESS, s);
 	glMaterialfv(GL_FRONT, GL_EMISSION, t);
-	glScalef(0.6f, 0.2f, 0.6f);
+	glScalef(5.9f, 0.2f, 5.9f);
 	glutSolidCube(1.0f);
 	glPopMatrix();
 
@@ -391,7 +391,7 @@ int main(int argc, char* argv[]) {
 	srand(time(0));
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-	glutInitWindowSize(1024, 768);
+	glutInitWindowSize(950, 950);
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow("Inverse Kinematics - Adwitiya Chakraborty - 17320705");
 	glutDisplayFunc(displayFrame);
@@ -426,10 +426,6 @@ int main(int argc, char* argv[]) {
 
 	root = new Bone(0.0f);
 
-	// root->add(new Bone(3.5))->constraints(-90,90, -90,90, -360,360)->rotate(0, 0, 0)
-	//     ->add(new Bone(4))->rotate(0, -75, 0)
-	//     ->add(new Bone(1))->rotate(0, -45, 0);
-	//  effector = 111;
 	root->add(new Bone(1))->add(new Bone(1))->rotate(0, 10, 0)
 		->add(new Bone(1))->rotate(0, 10, 0)
 		->add(new Bone(1))->rotate(0, 10, 0)

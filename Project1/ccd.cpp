@@ -14,18 +14,20 @@ void ccd::findNewAngles(Bone *endEffector, vec3 target, int iterations) {
       float cosine = dot(toEnd, toTarget);
       if(cosine < 0.99) {
         vec3 crossResult = cross(toEnd, toTarget);
-        float a = glm::angle(toTarget, toEnd);
-        quat rot = angleAxis(a, crossResult);
-        rot = normalize(rot);
-        glm::vec3 euler = glm::eulerAngles(rot) ;
+        float angle = glm::angle(toTarget, toEnd);
+        quat rotation = angleAxis(angle, crossResult);
+        rotation = normalize(rotation);
+        glm::vec3 euler = glm::eulerAngles(rotation) ;
         currentBone->rotateMax(euler.x, euler.y, euler.z);
       }
 
-      vec3 tmp = vec3(endEffector->getEndPosition());
-      tmp.x -= target.x; tmp.y -= target.y; tmp.z -= target.z;
-      if(dot(tmp, tmp) < 0.001) {
+      vec3 temp = vec3(endEffector->getEndPosition());
+      temp.x -= target.x; 
+	  temp.y -= target.y; 
+	  temp.z -= target.z;
+      if(dot(temp, temp) < 0.001) {
         found = true;
-        printf("found\n");
+        printf("target reached\n");
       }
       currentBone = currentBone->parent;
     }
