@@ -175,7 +175,7 @@ void displayFrame(void) {
 	s[0] = 0;
 	glMaterialfv(GL_FRONT, GL_SHININESS, s);
 	glMaterialfv(GL_FRONT, GL_EMISSION, t);
-	glScalef(5.9f, 0.2f, 5.9f);
+	glScalef(5.9f, 0.1f, 5.9f);
 	glutSolidCube(1.0f);
 	glPopMatrix();
 
@@ -194,13 +194,13 @@ void nextFrame(void) {
 	int actTime = glutGet(GLUT_ELAPSED_TIME);
 	float interval = actTime - lastTime;
 	lastTime = actTime;
-	angle_x += speed_x*interval / 1000.0;
-	angle_y += speed_y*interval / 1000.0;
+	angle_x += speed_x*interval / 500.0;
+	angle_y += speed_y*interval / 500.0;
 
 	if (animation_running) {
-		animation_fill += interval / 2000.0;
+		animation_fill += interval / 1000.0;
 
-		if (!animation->frame(interval / 2000.0, root)) {
+		if (!animation->frame(interval / 1000.0, root)) {
 			animation_fill = 0.0;
 			if (!animation->next()) {
 				animation_running = false;
