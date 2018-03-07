@@ -1,7 +1,8 @@
-IK Solver using CCD using OpenGL and C++
+# IK Solver using CCD using OpenGL and C++
 
-Adwitiya Chakraborty 
-
+Adwitiya Chakraborty
 Trinity College Dublin
-
 CS7GV4 Assignment 3
+
+
+**Wubba Lubba Dub Dub!**
