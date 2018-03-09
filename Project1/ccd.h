@@ -12,7 +12,7 @@ using namespace glm;
 
 namespace ccd {
   void findNewAngles(Bone *endEffector, vec3 target, int iterations=1000);
-  quat rotationBetweenVectors(vec3 start, vec3 dest);
+  //quat rotationBetweenVectors(vec3 start, vec3 dest);
 }
 
 #endif

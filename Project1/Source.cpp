@@ -194,8 +194,8 @@ void nextFrame(void) {
 	int actTime = glutGet(GLUT_ELAPSED_TIME);
 	float interval = actTime - lastTime;
 	lastTime = actTime;
-	angle_x += speed_x*interval / 500.0;
-	angle_y += speed_y*interval / 500.0;
+	angle_x += speed_x*interval / 700.0;
+	angle_y += speed_y*interval / 700.0;
 
 	if (animation_running) {
 		animation_fill += interval / 1000.0;
@@ -336,10 +336,6 @@ void keyDown(unsigned char c, int x, int y) {
 		case 'd':
 			root->bone(1)->rotate(0.0f, 0.0f, +1.0f);
 			break;
-		case ' ':
-			randomizeTarget();
-			break;
-
 		case 'Q':
 			target.z -= 0.2f;
 			break;
@@ -357,6 +353,9 @@ void keyDown(unsigned char c, int x, int y) {
 			break;
 		case 'D':
 			target.x += 0.2;
+			break;
+		case ' ':
+			randomizeTarget();
 			break;
 		}
 	}
@@ -444,11 +443,16 @@ int main(int argc, char* argv[]) {
 
 	root = new Bone(0.0f);
 
-	root->add(new Bone(1))->add(new Bone(1))->rotate(0, 10, 0)
+	root->add(new Bone(1))
 		->add(new Bone(1))->rotate(0, 10, 0)
 		->add(new Bone(1))->rotate(0, 10, 0)
 		->add(new Bone(1))->rotate(0, 10, 0)
-		->add(new Bone(1))->rotate(0, 10, 0)->add(new Bone(1))->rotate(0, 10, 0)->add(new Bone(1))->rotate(0, 10, 0);
+		->add(new Bone(1))->rotate(0, 10, 0)
+		->add(new Bone(1))->rotate(0, 10, 0)
+		->add(new Bone(1))->rotate(0, 10, 0)
+		->add(new Bone(1))->rotate(0, 10, 0);
+
+	
 
 	effector = 11111111;
 
